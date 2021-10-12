@@ -15,7 +15,6 @@ jobs:
     steps:
        - name: Checkouts
          uses: actions/checkout@master
-       - uses: rokibhasansagar/slimhub_actions@main
          
        - name: Initializing environment
          continue-on-error: true
