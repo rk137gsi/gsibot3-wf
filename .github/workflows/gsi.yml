@@ -77,7 +77,7 @@ jobs:
               sudo dpkg --purge --force-depends ca-certificates-java
               sudo apt-get install ca-certificates-java -y
               cd ${ABC}
-              git clone -b main https://github.com/rahulkhatri137/Bot3 Bot; cd Bot
+              git clone -b test https://github.com/rahulkhatri137/Bot3 Bot; cd Bot
               wget 'https://gist.githubusercontent.com/Velosh/95c9844c8a259fc99ec1f09c7c432781/raw/1f5ee87215c4b144bdc4674032e87d68df7fbd96/0001-Gradle-Patch-to-supports-lazy-method-for-Java-16-Vel.patch' -O 0001-Gradle-Patch-to-supports-lazy-method-for-Java-16-Vel.patch
               wget 'https://gist.githubusercontent.com/Velosh/6ad1a93fa8d3d78116b17fd34068da2b/raw/721b834ab23095dd2ee795bee2f2d888616378dd/0001-Bot-Use-.-as-default-prefix.patch' -O '0001-Bot-Use-.-as-default-prefix.patch'
               git am 0001-Gradle-Patch-to-supports-lazy-method-for-Java-16-Vel.patch
@@ -91,13 +91,3 @@ jobs:
          continue-on-error: true
          run: |
               sudo /usr/java/oracle/jdk-16.0.1/bin/java -jar BoboBot.jar
-         
-       - name: Loop
-         continue-on-error: true
-         run: |
-          git clone -b sgsi https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} loop
-          cd loop || exit 1
-          echo $(( RANDOM - ( RANDOM % RANDOM ) )) > loop.txt
-          git add loop.txt
-          git commit -m "Workflow : Loop"
-          git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:sgsi
