@@ -51,7 +51,7 @@ jobs:
          timeout-minutes: 10
          run: |
               sudo -E apt-get -qq install openjdk-8-jdk
-              git clone --recurse-submodules https://github.com/rahulkhatri137/ErfanGSIs
+              git clone --recurse-submodules https://github.com/rahulkhatri137/ErfanGSIs -b main
               sudo chmod -R 0777 ErfanGSIs
               sudo bash ErfanGSIs/setup.sh
 
