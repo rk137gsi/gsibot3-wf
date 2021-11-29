@@ -42,7 +42,7 @@ jobs:
               sudo dpkg --purge --force-depends ca-certificates-java
               sudo apt-get install ca-certificates-java -y
               cd ${ABC}
-              git clone -b main https://github.com/rahulkhatri137/Bot3 Bot; cd Bot
+              git clone -b n https://github.com/rahulkhatri137/Bot3 Bot; cd Bot
               ./gradlew shadowJar
               cd ../; mv Bot/build/libs/*.jar BoboBot.jar
               rm -rf Bot
