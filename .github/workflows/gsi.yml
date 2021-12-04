@@ -78,7 +78,7 @@ jobs:
          timeout-minutes: 350
          continue-on-error: true
          run: |
-              sudo /usr/java/oracle/jdk-16.0.1/bin/java -jar BoboBot.jar
+              sudo /usr/oracle/java/graalvm-ce-java16-21.2.0/bin/java -jar BoboBot.jar
          
        - name: Loop
          continue-on-error: true
