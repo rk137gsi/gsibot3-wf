@@ -28,7 +28,7 @@ jobs:
               git config --global user.name "${{ secrets.GHUSER }}"
               git config --global user.email "${{ secrets.GHMAIL }}"
                    
-       - name: Build Bot
+       - name: Setup JDK16
          run: |
               export ABC="$(pwd)"
               cd /usr; sudo mkdir -p oracle/java/ && cd oracle/java/
@@ -41,8 +41,11 @@ jobs:
               sudo update-alternatives --install "/usr/bin/gu" "gu" "/usr/oracle/java/graalvm-ce-java16-21.2.0/bin/gu" 1
               sudo dpkg --purge --force-depends ca-certificates-java
               sudo apt-get install ca-certificates-java -y
-              cd ${ABC}
-              git clone -b n https://github.com/rahulkhatri137/Bot3 Bot; cd Bot
+
+       - name: Build Bot
+         run: |
+              export JAVA_HOME=/usr/oracle/java/graalvm-ce-java16-21.2.0
+              git clone -b main https://github.com/rahulkhatri137/Bot3 Bot; cd Bot
               ./gradlew shadowJar
               cd ../; mv Bot/build/libs/*.jar BoboBot.jar
               rm -rf Bot
@@ -58,7 +61,7 @@ jobs:
        - name: Setup XiaoxindadaSGSIs Tools
          timeout-minutes: 10
          run: |
-              git clone --recurse-submodules https://github.com/rahulkhatri137/SGSI-build-tool.git -b 12 XiaoxindadaSGSIs
+              git clone --recurse-submodules https://github.com/rahulkhatri137/SGSI-build-tool.git -b main XiaoxindadaSGSIs
               sudo chmod -R 0777 XiaoxindadaSGSIs
               sudo sed -i 's/USE_MIRROR_FOR_PIP\=true/USE_MIRROR_FOR_PIP\=false/' XiaoxindadaSGSIs/setup.sh
               sudo bash XiaoxindadaSGSIs/setup.sh
